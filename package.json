@@ -1,0 +1,24 @@
+{
+  "name": "yelpcamp_backend",
+  "version": "1.0.0",
+  "description": "A practice project while following Backend Bootcamp Tutorial by Udemy",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sivantha/YelpCamp_Backend.git"
+  },
+  "author": "Sivantha Madusha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sivantha/YelpCamp_Backend/issues"
+  },
+  "homepage": "https://github.com/sivantha/YelpCamp_Backend#readme",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.2"
+  }
+}
