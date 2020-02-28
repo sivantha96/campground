@@ -1,5 +1,5 @@
 {
-  "name": "yelpcamp_backend",
+  "name": "campground",
   "version": "1.0.0",
   "description": "A practice project while following Backend Bootcamp Tutorial by Udemy",
   "main": "app.js",
@@ -20,5 +20,6 @@
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "nodemon": "^2.0.2"
-  }
+  },
+  "devDependencies": {}
 }
