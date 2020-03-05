@@ -3,33 +3,72 @@ const app           = express()
 const bodyParser    = require("body-parser")
 const mongoose      = require("mongoose")
 
+mongoose.connect("mongodb://localhost/campground", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(() => {
+    console.log("Connection to the database established!")
+}).catch(err => {
+    console.log("Database error")
+    console.log(err.message)
+})
 app.use(bodyParser.urlencoded({extended: true}))
 app.set("view engine","ejs")
 
-const campgrounds = [
-    {name: "Salmon Creek", image: "https://www.bluelankatours.com/wp-content/uploads/2017/08/Camping_Spots_In_Sri_Lanka.jpg"},
-    {name: "Granite Hills", image: "https://blog.yohobed.com/wp-content/uploads/2017/10/What-you-need-to-know-when-camping-in-Sri-Lanka-1024x670.jpg"},
-    {name: "Mountain Goats", image: "https://cdn.pixabay.com/photo/2017/11/05/18/49/camping-2921481_960_720.jpg"},
-]
+//SCHEMA SETUP
+const campgroundSchema = new mongoose.Schema({
+    name: String,
+    image: String,
+    description: String,
+})
+
+//MODEL SETUP
+const Campground = mongoose.model("Campground", campgroundSchema)
 
 app.get("/", function(req, res){
     res.render("landing")
 })
 
+//INDEX
 app.get("/campgrounds", function(req, res){
-    res.render("campgrounds", {campgrounds: campgrounds})
+    Campground.find({}, function(err, allCampgrounds){
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("index", {campgrounds: allCampgrounds})
+        }
+    })
 })
 
+//NEW
+app.get("/campgrounds/new", function(req, res){
+    res.render("new")
+})
+
+//CREATE
 app.post("/campgrounds", function(req, res){
      const name = req.body.name
      const image = req.body.image
-     const newCampground = {name: name, image:image}
-     campgrounds.push(newCampground)
-     res.redirect("/campgrounds")
+     const description = req.body.description
+     const newCampground = {name: name, image:image, description:description}
+     Campground.create(newCampground, function(err, newCampground) {
+         if (err) {
+             console.log(err);
+         } else {
+            res.redirect("/campgrounds")
+         }
+     })
 })
 
-app.get("/campgrounds/new", function(req, res){
-    res.render("new")
+//SHOW
+app.get("/campgrounds/:id", function(req, res){
+    Campground.findById(req.params.id, function(err, foundCampground){
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("show", {campground: foundCampground})
+        }
+    })
 })
 
 app.listen(3000, function(){
