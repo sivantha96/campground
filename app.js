@@ -1,15 +1,15 @@
-const express = require("express")
-const app = express()
-const bodyParser = require("body-parser")
+const express       = require("express")
+const app           = express()
+const bodyParser    = require("body-parser")
+const mongoose      = require("mongoose")
 
 app.use(bodyParser.urlencoded({extended: true}))
-
 app.set("view engine","ejs")
 
 const campgrounds = [
-    {name: "Salmon Creek", image: "https://pixabay.com/get/52e8d4444255ae14f6da8c7dda793f7f1636dfe2564c704c7d2d7cdc9645c65a_340.jpg"},
-    {name: "Granite Hills", image: "https://pixabay.com/get/57e8d1464d53a514f6da8c7dda793f7f1636dfe2564c704c7d2d7cdc9645c65a_340.jpg"},
-    {name: "Mountain Goats", image: "https://pixabay.com/get/57e8d0424a5bae14f6da8c7dda793f7f1636dfe2564c704c7d2d7cdc9645c65a_340.jpg"},
+    {name: "Salmon Creek", image: "https://www.bluelankatours.com/wp-content/uploads/2017/08/Camping_Spots_In_Sri_Lanka.jpg"},
+    {name: "Granite Hills", image: "https://blog.yohobed.com/wp-content/uploads/2017/10/What-you-need-to-know-when-camping-in-Sri-Lanka-1024x670.jpg"},
+    {name: "Mountain Goats", image: "https://cdn.pixabay.com/photo/2017/11/05/18/49/camping-2921481_960_720.jpg"},
 ]
 
 app.get("/", function(req, res){
