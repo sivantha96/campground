@@ -2,7 +2,12 @@ const express       = require("express")
 const app           = express()
 const bodyParser    = require("body-parser")
 const mongoose      = require("mongoose")
+const Campground    = require("./models/campground")
+const Comment       = require("./models/comment")
+const User          = require("./models/user")
+const seeds        = require("./seeds")
 
+seeds.seedDB()
 mongoose.connect("mongodb://localhost/campground", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -12,18 +17,10 @@ mongoose.connect("mongodb://localhost/campground", {
     console.log("Database error")
     console.log(err.message)
 })
+app.use(express.static("public"))
 app.use(bodyParser.urlencoded({extended: true}))
 app.set("view engine","ejs")
 
-//SCHEMA SETUP
-const campgroundSchema = new mongoose.Schema({
-    name: String,
-    image: String,
-    description: String,
-})
-
-//MODEL SETUP
-const Campground = mongoose.model("Campground", campgroundSchema)
 
 app.get("/", function(req, res){
     res.render("landing")
@@ -35,14 +32,14 @@ app.get("/campgrounds", function(req, res){
         if (err) {
             console.log(err);
         } else {
-            res.render("index", {campgrounds: allCampgrounds})
+            res.render("campgrounds/index", {campgrounds: allCampgrounds})
         }
     })
 })
 
 //NEW
 app.get("/campgrounds/new", function(req, res){
-    res.render("new")
+    res.render("campgrounds/new")
 })
 
 //CREATE
@@ -62,11 +59,11 @@ app.post("/campgrounds", function(req, res){
 
 //SHOW
 app.get("/campgrounds/:id", function(req, res){
-    Campground.findById(req.params.id, function(err, foundCampground){
+    Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
         if (err) {
             console.log(err);
         } else {
-            res.render("show", {campground: foundCampground})
+            res.render("campgrounds/show", {campground: foundCampground})
         }
     })
 })
