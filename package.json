@@ -4,6 +4,7 @@
   "description": "A practice project while following Backend Bootcamp Tutorial by Udemy",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "dev": "nodemon app.js"
   },
   "repository": {

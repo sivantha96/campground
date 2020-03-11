@@ -5,6 +5,7 @@ const   express         = require("express"),
         passport        = require("passport"),
         LocalStrategy   = require("passport-local"),
         methodOverride  = require("method-override"),
+        PORT            = process.env.PORT || 3000,
         User            = require("./models/user"),
         seeds           = require("./seeds"),
         expressSession  = require("express-session"),
@@ -12,8 +13,8 @@ const   express         = require("express"),
         commentRoutes   = require("./routes/comments"),
         indexRoutes     = require("./routes/index")
 
-// seeds.seedDB()
-mongoose.connect("mongodb://localhost/campground", {
+// seeds.seedDB()mongodb://localhost/campground
+mongoose.connect("mongodb+srv://admin:crNdmtn9FQymAlJQ@cluster0-6tibu.mongodb.net/test?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
@@ -23,6 +24,8 @@ mongoose.connect("mongodb://localhost/campground", {
     console.log("Database error")
     console.log(err.message)
 })
+
+
 
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -50,6 +53,6 @@ app.use("/", indexRoutes)
 app.use("/campgrounds", campgroundRoutes)
 app.use("/campgrounds/:id/comments", commentRoutes)
 
-app.listen(3000, function () {
+app.listen(PORT, function () {
     console.log("Server is listening on port 3000!")
 })
