@@ -7,7 +7,7 @@
         <div class="card-body" style="overflow:hidden;">
           <h4 class="card-title"><%= campground.name %></h4>
           <div class="card-subtitle">
-            <p class="card-text"><%= campground.description.substring(0,60) %></p>
+            <p class="card-text">Added by<br><%= campground.author.username %></p>
           </div>
         </div>
         <ul class="list-group list-group-flush">
@@ -63,6 +63,14 @@
         <div class="card-body">
           <p class="card-text"><%= campground.description %></p>
         </div>
+        <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
+          <div class="card-footer flex-row-reverse d-flex ">
+            <form action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+              <button type="submit" class="btn btn-sm btn-danger ml-2">Delete</button>
+            </form>
+            <a href="/campgrounds/<%=campground._id%>/edit" class="btn ml-2 btn-sm btn-warning">Edit</a>
+          </div>
+        <% } %>
       </div>
       <div class="card my-2">
         <div class="card-body">
@@ -71,10 +79,9 @@
           <br>
           <% campground.comments.forEach(function(comment){ %>
           <span class="float-right">10 days ago</span>
-          <h5><%= comment.author %></h5>
+          <h5><%= comment.author.username %></h5>
           <p><%= comment.text %></p>
           <hr>
-          <br>
           <% })  %>
           <a href="/campgrounds/<%= campground._id %>/comments/new" class="btn btn-primary">Add a comment</a>
         </div>

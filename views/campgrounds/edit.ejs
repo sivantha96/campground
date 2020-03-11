@@ -1,21 +1,23 @@
 <%- include('../partials/header') %>
 
-<div class="row justify-content-center">
+<div class="row my-2 justify-content-center">
     <div class="col-sm-8 col-md-6 col-lg-4 col-12 ">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title" style="text-align:center;">Create a new Campground</h5>
+                <h5 class="card-title" style="text-align:center;">Edit Campground</h5>
                 <div>
-                    <form action="/campgrounds" method="POST">
+                    <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST">
                         <div class="form-group">
-                            <input class="form-control" type="text" name="name" placeholder="Name">
+                            <input class="form-control" type="text" name="campground[name]"
+                                value="<%= campground.name %>">
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="text" name="image" placeholder="Image URL">
+                            <input class="form-control" type="text" name="campground[image]"
+                                value="<%= campground.image %>">
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" rows="3" type="text" name="description"
-                                placeholder="Description"></textarea>
+                            <textarea class="form-control" rows="3" type="text"
+                                name="campground[description]"><%= campground.description %></textarea>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-md btn-primary btn-block">Submit</button>
