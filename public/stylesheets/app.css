@@ -6,7 +6,6 @@
 
 .carousel-item.landing {
     height: 100vh;
-    min-height: 100%;
     background: no-repeat center center;
     -webkit-background-size: cover !important;
     -moz-background-size: cover !important;
