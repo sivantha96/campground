@@ -14,8 +14,9 @@ const   express         = require("express"),
         indexRoutes     = require("./routes/index")
 
 // seeds.seedDB()
-//mongodb+srv://admin:crNdmtn9FQymAlJQ@cluster0-6tibu.mongodb.net/test?retryWrites=true&w=majority
-mongoose.connect("mongodb://localhost/campground", {
+
+//mongodb://localhost/campground
+mongoose.connect("mongodb+srv://admin:crNdmtn9FQymAlJQ@cluster0-6tibu.mongodb.net/test?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
