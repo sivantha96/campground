@@ -3,3 +3,13 @@
     height: 15vw;
     object-fit: cover;
 }
+
+.carousel-item.landing {
+    height: 95vh;
+    min-height: 350px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
