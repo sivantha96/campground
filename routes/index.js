@@ -5,7 +5,7 @@ const   express     = require("express"),
 
 // ROOT ROUTE
 router.get("/", function (req, res) {
-    res.render("landing")
+    res.redirect("/campgrounds")
 })
 
 // GET ROUTE SIGNUP
