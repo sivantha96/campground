@@ -1,13 +1,2 @@
-# YelpCamp
-A practice project while following the Backend Bootcamp Tutorial on Udemy
-
-## Technology Used
-JavaScript\
-Node.js\
-Express\
-HTML\
-CSS\
-Ejs\
-Nodemon\
-Bootstrap\
-Body-Parser\
+# Campground
+A web platform to discover and review campgrounds in Sri Lanka
